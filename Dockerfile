@@ -1,27 +1,25 @@
-# Use Maven with Java 17 to build the app
-FROM maven:3.9.2-eclipse-temurin-17 AS build
+# Stage 1: Build the app using Maven
+FROM maven:3.9.6-eclipse-temurin-17 as builder
 
 WORKDIR /app
 
-# Copy pom.xml and download dependencies
+# Copy pom and source
 COPY pom.xml .
-RUN mvn dependency:go-offline
-
-# Copy source code
 COPY src ./src
 
-# Build the app
+# Build the project
 RUN mvn clean package -DskipTests
 
-# Run stage - lightweight JRE 17 Alpine
-FROM eclipse-temurin:17-jre-alpine
+# Stage 2: Run the Spring Boot app
+FROM eclipse-temurin:17-jre
 
 WORKDIR /app
 
-# Copy jar from build stage
-COPY --from=build /app/target/demo-workshop-2.0.2.jar app.jar
+# Copy built jar from builder stage
+COPY --from=builder /app/target/demo-workshop-2.0.2.jar app.jar
 
-# Expose port 8080
+# Expose port (change if needed)
 EXPOSE 8080
 
+# Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
