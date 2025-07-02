@@ -7,10 +7,10 @@ WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 
-# Build the project and package jar (skip tests for speed)
+# Build the project and package the jar (skip tests for speed)
 RUN mvn clean package -DskipTests
 
-# Stage 2: Run the jar
+# Stage 2: Run the jar using a lightweight JRE image
 FROM openjdk:17-jdk-alpine
 
 WORKDIR /app
