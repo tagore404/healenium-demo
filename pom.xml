@@ -63,15 +63,14 @@
             <version>5.8.0</version>
         </dependency>
 
-        <!-- TestNG -->
+        <!-- TestNG (no <scope>test</scope> so available to main code) -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.7.0</version>
-            <scope>test</scope>
         </dependency>
 
-        <!-- Allure TestNG Adapter (for @Attachment, ITestResult support) -->
+        <!-- Allure TestNG Adapter (for @Attachment, reporting) -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
