@@ -1,11 +1,22 @@
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:17-jdk-alpine
+# Stage 1: Build the jar using Maven
+FROM maven:3.8.5-openjdk-17 AS build
 
-# Set the working directory
 WORKDIR /app
 
-# Copy the built JAR file (adjust the path as needed)
-COPY target/demo-workshop-2.0.2.jar app.jar
+# Copy pom.xml and source code
+COPY pom.xml .
+COPY src ./src
 
-# Run the JAR file
+# Build the project and package jar (skip tests for speed)
+RUN mvn clean package -DskipTests
+
+# Stage 2: Run the jar
+FROM openjdk:17-jdk-alpine
+
+WORKDIR /app
+
+# Copy the jar from the build stage
+COPY --from=build /app/target/demo-workshop-2.0.2.jar app.jar
+
+# Run the jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
