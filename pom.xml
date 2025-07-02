@@ -24,7 +24,7 @@
     </properties>
 
     <dependencies>
-        <!-- Spring Boot -->
+        <!-- Spring Boot Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -63,21 +63,29 @@
             <version>5.8.0</version>
         </dependency>
 
-        <!-- TestNG (no <scope>test</scope> so available to main code) -->
+        <!-- TestNG (required in main and test code) -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.7.0</version>
         </dependency>
 
-        <!-- Allure TestNG Adapter (for @Attachment, reporting) -->
+        <!-- Allure for TestNG -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>2.24.0</version>
         </dependency>
 
-        <!-- Spring Boot Testing -->
+        <!-- Healenium WebDriver -->
+        <dependency>
+            <groupId>com.epam.healenium</groupId>
+            <artifactId>healenium-web</artifactId>
+            <version>3.0.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Spring Boot Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
