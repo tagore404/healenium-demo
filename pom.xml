@@ -82,7 +82,6 @@
             <groupId>com.epam.healenium</groupId>
             <artifactId>healenium-web</artifactId>
             <version>3.0.1</version>
-            <scope>test</scope>
         </dependency>
 
         <!-- Spring Boot Test -->
